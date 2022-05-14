@@ -1,0 +1,192 @@
+package com.sailesh.springproject.applestore.controller;
+
+
+import static org.assertj.core.api.Assertions.anyOf;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.sailesh.springproject.applestore.dao.CategoryRepository;
+import com.sailesh.springproject.applestore.entity.Category;
+import com.sailesh.springproject.applestore.entity.Product;
+import com.sailesh.springproject.applestore.service.CategoryService;
+import com.sailesh.springproject.applestore.service.ProductService;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.multipart.MultipartFile;
+
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class TestAdminController {
+
+    private MockMvc mockMvc;
+
+    AdminController adminController;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    ProductService productService;
+
+
+    @Before
+    public void setup() {
+        adminController = new AdminController(categoryService,productService);
+
+        mockMvc = MockMvcBuilders.standaloneSetup(adminController).build();
+    }
+
+    @Test
+    public void contextLoads(){
+        setup();
+        Assertions.assertThat(adminController).isNotNull();
+    }
+
+    @Test
+    public void testGetAdmin() throws Exception{
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/admin"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("admin-home"));
+    }
+
+
+
+    @Test
+    public void testGetCategories() throws Exception{
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/admin/categories"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("category"));
+    }
+
+
+    @Test
+    public void testGetCategoriesAdd() throws Exception{
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/admin/categories/add"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("categories-add"));
+    }
+
+    @Test
+    public void testPostCategoriesAdd() throws Exception{
+
+        setup();
+        mockMvc.perform(post("/admin/categories/add")
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
+                        .param("id",String.valueOf(1))
+                        .param("name","iphone 12 series")
+                )
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Test
+    public void testDeleteCategory() throws Exception {
+        Category category = new Category();
+        category.setName("iphone6 series");
+
+        Category category1 = categoryService.addCategory(category);
+
+//        categoryService.deleteCategoryById(category.getId());
+        mockMvc
+                .perform(get("/admin/categories/delete/"+category.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/admin/categories"));
+
+    }
+
+
+
+
+    @Test
+    public void testGetProducts() throws Exception{
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/admin/products"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("product"));
+    }
+
+
+    @Test
+    public void testGetAddProduct() throws Exception{
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/admin/products/add"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("products-add"));
+    }
+
+
+    @Test
+    public void testPostAddProduct() throws Exception {
+        setup();
+        mockMvc.perform(post("/admin/categories/add")
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
+                        .param("id", String.valueOf(1))
+                        .param("name", "bread")
+                        .param("category_id",String.valueOf(3))
+                        .param("price",String.valueOf(200000))
+                        .param("description","BestSeller")
+                )
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void testDeleteProduct() throws Exception{
+
+        Category category = new Category();
+        category.setName("iphone6 series");
+
+        Product product = new Product();
+        product.setName("iphone 12");
+        product.setCategory(category);
+        product.setPrice(42000);
+        product.setDescription("Good product");
+        product.setImageName("iphone12.jpeg");
+
+        Product product1 = productService.addProduct(product);
+
+        mockMvc
+                .perform(get("/admin/product/delete/"+product.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.view().name("redirect:/admin/products"));
+
+
+    }
+
+
+}
