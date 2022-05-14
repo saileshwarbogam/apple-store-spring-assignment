@@ -68,19 +68,19 @@ public class TestLoginController {
                 .andExpect(MockMvcResultMatchers.view().name("register-view"));
     }
 
-    @Test
-    public void testRegisterPostIf() throws Exception {
-
-        setup();
-        mockMvc.perform(post("/register")
-                .contentType(MediaType.MULTIPART_FORM_DATA)
-                .param("firstName", "Sril")
-                .param("lastName", "Laxm")
-                .param("email", "sriles@gmail.com")
-                .param("password", "1234567a")
-        )
-                .andExpect(status().is3xxRedirection());
-    }
+//    @Test
+//    public void testRegisterPostIf() throws Exception {
+//
+//        setup();
+//        mockMvc.perform(post("/register")
+//                .contentType(MediaType.MULTIPART_FORM_DATA)
+//                .param("firstName", "Sril")
+//                .param("lastName", "Laxm")
+//                .param("email", "sriles@gmail.com")
+//                .param("password", "1234567a")
+//        )
+//                .andExpect(status().is3xxRedirection());
+//    }
 
     @Test
     public void testRegisterPostElse() throws Exception {
