@@ -1,67 +1,66 @@
 package com.sailesh.springproject.applestore.dto;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class TestProductDTO {
+//
+//    private int id;
+//    private String name;
+//
+//    private int categoryId;
+//
+//    private double price;
+//    private String description;
+//    private String imageName;
 
     @Test
     public void getId() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(1);
-
         assertEquals(1,productDTO.getId());
-
     }
-
 
     @Test
     public void getName() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setName("iphone12");
-
         assertEquals("iphone12",productDTO.getName());
-
     }
 
     @Test
-    public  void categoryId() {
+    public void getCategoryId() {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCategoryId(1);
-
         assertEquals(1,productDTO.getCategoryId());
     }
 
     @Test
-    public void  price() {
+    public void getPrice() {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setPrice(42000);
-
-        assertEquals(42000, productDTO.getPrice());
+        productDTO.setPrice(1);
+        assertEquals(1,productDTO.getPrice());
     }
+
 
     @Test
-    public  void description() {
+    public void getDescription() {
         ProductDTO productDTO = new ProductDTO();
-
-        productDTO.setDescription("Good product");
-
-        assertEquals("Good product", productDTO.getDescription());
+        productDTO.setDescription("good");
+        assertEquals("good",productDTO.getDescription());
     }
+
+
 
     @Test
-    public void imageName() {
+    public void getImageName() {
         ProductDTO productDTO = new ProductDTO();
-
-        productDTO.setImageName("iphone12.jpeg");
-
-        assertEquals("iphone12.jpeg", productDTO.getImageName());
+        productDTO.setImageName("good");
+        assertEquals("good",productDTO.getImageName());
     }
+
+
+
+
 }

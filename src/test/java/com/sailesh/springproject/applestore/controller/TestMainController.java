@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -93,7 +92,7 @@ public class TestMainController {
     @Test
     public void testViewProduct() throws Exception {
         Product product = new Product();
-        product.setId(4);
+        product.setId(1);
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/shop/viewproduct/"+ product.getId()))
@@ -108,8 +107,5 @@ public class TestMainController {
                 )
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("cart-view"));
-
-
-
     }
 }

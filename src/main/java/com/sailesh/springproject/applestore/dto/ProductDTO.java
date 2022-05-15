@@ -1,6 +1,5 @@
 package com.sailesh.springproject.applestore.dto;
 
-import com.sailesh.springproject.applestore.entity.Category;
 import lombok.Data;
 
 

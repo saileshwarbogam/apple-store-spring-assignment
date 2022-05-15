@@ -1,7 +1,6 @@
 package com.sailesh.springproject.applestore.service;
 
 import com.sailesh.springproject.applestore.dao.CategoryRepository;
-import com.sailesh.springproject.applestore.dao.ProductRepository;
 import com.sailesh.springproject.applestore.entity.Category;
 import org.junit.Test;
 import org.junit.runner.RunWith;

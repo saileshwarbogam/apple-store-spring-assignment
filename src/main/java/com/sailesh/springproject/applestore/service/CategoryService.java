@@ -5,7 +5,6 @@ import com.sailesh.springproject.applestore.dao.CategoryRepository;
 import com.sailesh.springproject.applestore.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

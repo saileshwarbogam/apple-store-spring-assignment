@@ -1,7 +1,5 @@
 package com.sailesh.springproject.applestore.controller;
 
-import com.sailesh.springproject.applestore.entity.Product;
-import com.sailesh.springproject.applestore.global.GlobalData;
 import com.sailesh.springproject.applestore.service.ProductService;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
