@@ -1,9 +1,13 @@
 package com.sailesh.springproject.applestore.controller;
 
+import com.sailesh.springproject.applestore.entity.Product;
+import com.sailesh.springproject.applestore.global.GlobalData;
+import com.sailesh.springproject.applestore.service.ProductService;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,9 +25,12 @@ public class TestCartController {
 
     CartController cartController;
 
+    @Autowired
+    ProductService productService;
+
     @Before
     public void setup() {
-       cartController = new CartController();
+       cartController = new CartController(productService);
         mockMvc = MockMvcBuilders.standaloneSetup(cartController).build();
 
     }
@@ -41,8 +48,18 @@ public class TestCartController {
                 .perform(MockMvcRequestBuilders.get("/cart"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("cart-view"));
+    }
 
+    @Test
+    public  void testAddToCart() throws Exception {
+        Product product = new Product();
+        product.setId(1);
 
-
+        GlobalData.cart.add(product);
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/addToCart/1"))
+                .andExpect(status().isOk())
+                .andExpect(status().is3xxRedirection());
     }
 }
