@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class LoginController {
+
+    private Logger myLogger = Logger.getLogger(getClass().getName());
+
 
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -55,7 +59,7 @@ public class LoginController {
     public String registerPost(@Valid @ModelAttribute("user") User user, BindingResult errors){
 
         if(errors.hasErrors()){
-            System.err.println(errors.toString());
+            myLogger.info(errors.toString());
             return "register-view";
         }
 
@@ -65,9 +69,7 @@ public class LoginController {
             user.setPassword(bCryptPasswordEncoder.encode(password));
 
             List<Role> roles = new ArrayList<>();
-            if(!roleRepository.findById(2).isEmpty()){
-                roles.add(roleRepository.findById(2).get());
-            }
+            roles.add(roleRepository.findById(2).get());
 
 
             user.setRoles(roles);

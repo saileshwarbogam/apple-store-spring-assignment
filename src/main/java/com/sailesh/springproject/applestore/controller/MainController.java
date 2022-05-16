@@ -60,8 +60,11 @@ public class MainController {
 
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model, @PathVariable int id){
-        model.addAttribute("product",productService.getProductById(id).get()); //returns optional
-        model.addAttribute(cartCount, GlobalData.cart.size());
+        if(productService.getProductById(id).isPresent()) {
+            model.addAttribute("product",productService.getProductById(id).get()); //returns optional
+            model.addAttribute(cartCount, GlobalData.cart.size());
+
+        }
 
 
         return "view-product";

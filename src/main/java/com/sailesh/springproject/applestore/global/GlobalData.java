@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GlobalData {
 
-    public static final List<Product> cart;
+    public static  List<Product> cart;
 
     static {
         cart = new ArrayList<>();

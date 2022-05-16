@@ -206,7 +206,4 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@Test
-	void contextLoads() {
-	}
 }

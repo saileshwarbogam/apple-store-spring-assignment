@@ -37,6 +37,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String admin(){
+
         return "admin-home";
     }
 
@@ -106,7 +107,11 @@ public class AdminController {
 
         product.setId(productDTO.getId());
         product.setName(productDTO.getName());
-        product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
+
+        if(categoryService.getCategoryById(productDTO.getCategoryId()).isPresent()) {
+            product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
+
+        }
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
         String imageUUID;

@@ -24,6 +24,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
         user.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return  user.map(CustomUserDetail::new).get();
+        if(user.map(CustomUserDetail::new).isPresent()){
+            return  user.map(CustomUserDetail::new).get();
+        }
+        return null;
     }
 }
