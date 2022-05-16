@@ -22,7 +22,10 @@ public class CartController {
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable int id){
-        GlobalData.cart.add(productService.getProductById(id).get());
+        if(productService.getProductById(id).isPresent()){
+            GlobalData.cart.add(productService.getProductById(id).get());
+        }
+
 
         return "redirect:/shop";
     }

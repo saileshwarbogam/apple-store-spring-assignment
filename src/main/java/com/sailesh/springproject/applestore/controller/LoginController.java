@@ -65,7 +65,10 @@ public class LoginController {
             user.setPassword(bCryptPasswordEncoder.encode(password));
 
             List<Role> roles = new ArrayList<>();
-            roles.add(roleRepository.findById(2).get());
+            if(!roleRepository.findById(2).isEmpty()){
+                roles.add(roleRepository.findById(2).get());
+            }
+
 
             user.setRoles(roles);
 
