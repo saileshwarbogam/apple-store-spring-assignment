@@ -6,6 +6,7 @@ import com.sailesh.springproject.applestore.entity.Category;
 import com.sailesh.springproject.applestore.entity.Product;
 import com.sailesh.springproject.applestore.service.CategoryService;
 import com.sailesh.springproject.applestore.service.ProductService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -46,7 +47,8 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(categoryRepository.save(category1)).thenReturn(category1);
 
-		assertThat(categoryService.addCategory(category1)).isEqualTo(category1);
+		categoryService.addCategory(category1);
+		verify(categoryRepository,times(1)).save(category1);
 	}
 
 	@org.junit.Test
@@ -58,7 +60,7 @@ class AppleStoreApplicationTests {
 
 		Category category2 = new Category();
 		category2.setId(1);
-		category2.setName("iphone 12 series");
+		category2.setName("iphone 13 series");
 
 		List<Category> categoryList = new ArrayList<>();
 
@@ -67,7 +69,7 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(categoryRepository.findAll()).thenReturn(categoryList);
 
-		assertThat(categoryService.getAllCategory()).isEqualTo(categoryList);
+		Assertions.assertEquals(2,categoryService.getAllCategory().size());
 
 	}
 
@@ -90,7 +92,12 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(categoryRepository.findById(1)).thenReturn(Optional.of(category1));
 
-		assertThat(categoryService.getCategoryById(1)).isEqualTo(Optional.of(category1));
+//		Assertions.assertEquals(Optional.of(category1),categoryService.getCategoryById(4));
+
+
+//		assertThat(categoryService.getCategoryById(1)).isEqualTo(Optional.of(category1));
+
+		Assertions.assertEquals(Optional.of(category1), categoryService.getCategoryById(1));
 	}
 
 
@@ -107,7 +114,9 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(productRepository.save(product)).thenReturn(product);
 
-		assertThat(productService.addProduct(product)).isEqualTo(product);
+		productService.addProduct(product);
+
+		verify(productRepository,times(1)).save(product);
 
 	}
 
@@ -124,7 +133,7 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(productRepository.findById(1)).thenReturn(Optional.of(product));
 
-		assertThat(productService.getProductById(1)).isEqualTo(Optional.of(product));
+		Assertions.assertEquals(Optional.of(product),productService.getProductById(1));
 
 
 	}
@@ -155,7 +164,7 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(productRepository.findAll()).thenReturn(productList);
 
-		assertThat(productService.getAllProducts()).isEqualTo(productList);
+		Assertions.assertEquals(2,productService.getAllProducts().size());
 	}
 
 
@@ -175,7 +184,7 @@ class AppleStoreApplicationTests {
 
 		Mockito.when(productRepository.findAllByCategory_Id(1)).thenReturn(productList);
 
-		assertThat(productService.getAllProductsByCategoryId(1)).isEqualTo(productList);
+		Assertions.assertEquals(1,productService.getAllProductsByCategoryId(1).size());
 	}
 
 
