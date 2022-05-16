@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestAdminController {
+public class AdminControllerTest {
 
     private MockMvc mockMvc;
 

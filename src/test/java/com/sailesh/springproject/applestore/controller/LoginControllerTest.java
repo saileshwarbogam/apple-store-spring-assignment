@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestLoginController {
+public class LoginControllerTest {
 
     private MockMvc mockMvc;
     LoginController loginController;
