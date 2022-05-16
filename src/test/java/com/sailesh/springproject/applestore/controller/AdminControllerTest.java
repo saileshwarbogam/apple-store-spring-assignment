@@ -184,5 +184,31 @@ public class AdminControllerTest {
 
     }
 
+    @Test
+    public void testUpdateCategory() throws Exception {
+        Category category = new Category();
+        category.setName("iphone6 series");
+
+        Category category1 = categoryService.addCategory(category);
+
+        mockMvc
+                .perform(get("/admin/categories/update/"+category.getId()))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.view().name("categories-add"));
+    }
+
+    @Test
+    public void testUpdateCategory404() throws Exception {
+        Category category = new Category();
+        category.setName("iphone6 series");
+
+        Category category1 = categoryService.addCategory(category);
+
+        mockMvc
+                .perform(get("/admin/categories/update/"+"20"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.view().name("404"));
+    }
+
 
 }
