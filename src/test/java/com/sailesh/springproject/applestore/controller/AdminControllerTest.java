@@ -27,6 +27,7 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -63,6 +64,7 @@ public class AdminControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("admin-home"));
     }
@@ -74,6 +76,7 @@ public class AdminControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/categories"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("category"));
     }
@@ -84,6 +87,7 @@ public class AdminControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/admin/categories/add"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("categories-add"));
     }
@@ -97,6 +101,7 @@ public class AdminControllerTest {
                         .param("id",String.valueOf(1))
                         .param("name","iphone 12 series")
                 )
+                .andDo(print())
                 .andExpect(status().is3xxRedirection());
     }
 
@@ -113,6 +118,7 @@ public class AdminControllerTest {
 //        categoryService.deleteCategoryById(category.getId());
         mockMvc
                 .perform(get("/admin/categories/delete/"+category.getId()))
+                .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/admin/categories"));
 

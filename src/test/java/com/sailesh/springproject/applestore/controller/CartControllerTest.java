@@ -47,6 +47,7 @@ public class CartControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/cart"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("cart-view"));
     }

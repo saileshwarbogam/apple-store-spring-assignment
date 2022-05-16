@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -55,6 +56,7 @@ public class LoginControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/login"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("log-in"));
     }
@@ -64,6 +66,7 @@ public class LoginControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/register"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("register-view"));
     }
@@ -79,6 +82,7 @@ public class LoginControllerTest {
                 .param("email", "sriles@gmail.com")
                 .param("password", "1234567a")
         )
+                .andDo(print())
                 .andExpect(status().is3xxRedirection());
     }
 
@@ -93,6 +97,7 @@ public class LoginControllerTest {
                         .param("email", "sailesh@gmail.com")
                         .param("password", "123abc")
                 )
+                .andDo(print())
                 .andExpect(MockMvcResultMatchers.view().name("register-view"));
     }
 }

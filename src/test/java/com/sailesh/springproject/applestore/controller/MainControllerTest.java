@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,6 +53,7 @@ public class MainControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"));
     }
@@ -61,6 +63,7 @@ public class MainControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/home"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"));
     }
@@ -70,6 +73,7 @@ public class MainControllerTest {
         setup();
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/shop"))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("shop-view"));
     }
@@ -84,6 +88,7 @@ public class MainControllerTest {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/shop/category/"+category.getId()))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("shop-view"));
     }
@@ -96,6 +101,7 @@ public class MainControllerTest {
 
         mockMvc
                 .perform(MockMvcRequestBuilders.get("/shop/viewproduct/"+ product.getId()))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("view-product"));
     }
@@ -105,6 +111,7 @@ public class MainControllerTest {
         setup();
         mockMvc.perform(MockMvcRequestBuilders.get("/checkout")
                 )
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("cart-view"));
     }
