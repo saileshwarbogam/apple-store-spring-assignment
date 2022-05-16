@@ -20,9 +20,7 @@ public class CustomUserDetail extends User implements UserDetails {
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
-        super.getRoles().forEach(role -> {
-            authorityList.add(new SimpleGrantedAuthority(role.getName()));
-        });
+        super.getRoles().forEach(role -> authorityList.add(new SimpleGrantedAuthority(role.getName())));
 
         return authorityList;
 

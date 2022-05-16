@@ -7,9 +7,13 @@ import java.util.List;
 
 public class GlobalData {
 
-    public static List<Product> cart;
+    public static final List<Product> cart;
 
     static {
-        cart = new ArrayList<Product>();
+        cart = new ArrayList<>();
+    }
+
+    private  GlobalData() {
+        throw new UnsupportedOperationException("This  class cannot be instantiated");
     }
 }

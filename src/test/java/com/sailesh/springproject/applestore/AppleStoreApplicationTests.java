@@ -52,7 +52,7 @@ class AppleStoreApplicationTests {
 	}
 
 	@Test
-	public void testGetAllCategory(){
+	 void testGetAllCategory(){
 
 		Category category1 = new Category();
 		category1.setId(1);
@@ -74,7 +74,7 @@ class AppleStoreApplicationTests {
 	}
 
 	@Test
-	public void testDeleteCategoryById(){
+	 void testDeleteCategoryById(){
 		Category category1 = new Category();
 		category1.setId(1);
 		category1.setName("iphone 12 series");
@@ -85,7 +85,7 @@ class AppleStoreApplicationTests {
 	}
 
 	@Test
-	public void testGetCategoryById() {
+	 void testGetCategoryById() {
 		Category category1 = new Category();
 		category1.setId(1);
 		category1.setName("iphone 12 series");
@@ -102,7 +102,7 @@ class AppleStoreApplicationTests {
 
 
 	@Test
-	public void testAddProduct(){
+	 void testAddProduct(){
 		Product product = new Product();
 
 		product.setName("iphone12");
@@ -121,7 +121,7 @@ class AppleStoreApplicationTests {
 	}
 
 	@Test
-	public void testGetProductById(){
+	 void testGetProductById(){
 		Product product = new Product();
 
 		product.setName("iphone12");
@@ -139,7 +139,7 @@ class AppleStoreApplicationTests {
 	}
 
 	@Test
-	public void testGetAllProducts() {
+	void testGetAllProducts() {
 		Product product1 = new Product();
 
 		product1.setName("iphone12");
@@ -169,7 +169,7 @@ class AppleStoreApplicationTests {
 
 
 	@Test
-	public void testGetAllProductsByCategoryId(){
+	void testGetAllProductsByCategoryId(){
 		Product product = new Product();
 
 		product.setName("iphone12");
@@ -189,7 +189,7 @@ class AppleStoreApplicationTests {
 
 
 	@Test
-	public void testRemoveProductById(){
+	void testRemoveProductById(){
 		Product product = new Product();
 
 		product.setName("iphone12");

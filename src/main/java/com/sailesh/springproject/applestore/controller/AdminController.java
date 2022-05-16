@@ -20,13 +20,15 @@ import java.util.Optional;
 @Controller
 public class AdminController {
 
-    public static String uploadDir = System.getProperty("user.dir")+"/src/main/resources/static/product-images";
+    public static final String uploadDir = System.getProperty("user.dir")+"/src/main/resources/static/product-images";
 
     @Autowired
     CategoryService categoryService;
 
     @Autowired
     ProductService productService;
+
+    String categoryStr = "category";
 
     public AdminController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
@@ -41,12 +43,12 @@ public class AdminController {
     @GetMapping("/admin/categories")
     public String getCategories(Model model) {
         model.addAttribute("categories",categoryService.getAllCategory());
-        return "category";
+        return categoryStr;
     }
 
     @GetMapping("/admin/categories/add")
     public String getCategoriesAdd(Model model) {
-        model.addAttribute("category",new Category());
+        model.addAttribute(categoryStr,new Category());
         return "categories-add";
     }
 
@@ -68,7 +70,7 @@ public class AdminController {
         Optional<Category> category = categoryService.getCategoryById(id);
 
         if(category.isPresent()){
-            model.addAttribute("category", category);
+            model.addAttribute(categoryStr, category);
             return "categories-add";
         }
         else{

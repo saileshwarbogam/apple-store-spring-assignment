@@ -18,6 +18,8 @@ public class MainController {
     @Autowired
     ProductService productService;
 
+    String cartCount = "cartCount";
+
 
     public MainController(CategoryService categoryService, ProductService productService) {
         this.categoryService = categoryService;
@@ -27,7 +29,7 @@ public class MainController {
     @GetMapping({"/", "/home"})
     public String home(Model model){
 
-        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute(cartCount, GlobalData.cart.size());
 
 
 
@@ -39,7 +41,7 @@ public class MainController {
 
         model.addAttribute("categories",categoryService.getAllCategory());
         model.addAttribute("products",productService.getAllProducts());
-        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute(cartCount, GlobalData.cart.size());
 
         return "shop-view";
     }
@@ -49,7 +51,7 @@ public class MainController {
 
         model.addAttribute("categories",categoryService.getAllCategory());
         model.addAttribute("products",productService.getAllProductsByCategoryId(id));
-        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute(cartCount, GlobalData.cart.size());
 
 
         return "shop-view";
@@ -59,7 +61,7 @@ public class MainController {
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model, @PathVariable int id){
         model.addAttribute("product",productService.getProductById(id).get()); //returns optional
-        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute(cartCount, GlobalData.cart.size());
 
 
         return "view-product";

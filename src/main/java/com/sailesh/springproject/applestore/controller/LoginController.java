@@ -55,7 +55,7 @@ public class LoginController {
     public String registerPost(@Valid @ModelAttribute("user") User user, BindingResult errors){
 
         if(errors.hasErrors()){
-            System.out.println(errors.toString());
+            System.err.println(errors.toString());
             return "register-view";
         }
 
