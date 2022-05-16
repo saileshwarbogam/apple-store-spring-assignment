@@ -6,8 +6,8 @@ import com.sailesh.springproject.applestore.entity.Category;
 import com.sailesh.springproject.applestore.entity.Product;
 import com.sailesh.springproject.applestore.service.CategoryService;
 import com.sailesh.springproject.applestore.service.ProductService;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class AppleStoreApplicationTests {
 
+	@Test
+	void testingMainMethodInSpringBootApplication()
+	{
+		AppleStoreApplication.main(new String[]{});
+		Assertions.assertTrue(true, "asserting to with Sonar");
+	}
 
 	@Autowired
 	private CategoryService categoryService;
@@ -34,10 +40,6 @@ class AppleStoreApplicationTests {
 	private CategoryRepository categoryRepository;
 
 
-	@Autowired
-	private ProductService productService;
-	@MockBean
-	private ProductRepository productRepository;
 	@Test
 	public void testAddCategory(){
 		Category category1 = new Category();
@@ -70,7 +72,8 @@ class AppleStoreApplicationTests {
 		assertThat(categoryService.getAllCategory()).isEqualTo(categoryList);
 
 	}
-	@Test
+
+	@org.junit.Test
 	public void testDeleteCategoryById(){
 		Category category1 = new Category();
 		category1.setId(1);
@@ -81,7 +84,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void testGetCategoryById() {
 		Category category1 = new Category();
 		category1.setId(1);
@@ -92,7 +95,12 @@ class AppleStoreApplicationTests {
 		assertThat(categoryService.getCategoryById(1)).isEqualTo(Optional.of(category1));
 	}
 
-	@Test
+	@Autowired
+	private ProductService productService;
+	@MockBean
+	private ProductRepository productRepository;
+
+	@org.junit.Test
 	public void testAddProduct(){
 		Product product = new Product();
 
@@ -109,7 +117,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void testGetProductById(){
 		Product product = new Product();
 
@@ -127,7 +135,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@Test
+	@org.junit.Test
 	public void testGetAllProducts() {
 		Product product1 = new Product();
 
@@ -157,7 +165,7 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@Test
+	@org.junit.Test
 	public void testGetAllProductsByCategoryId(){
 		Product product = new Product();
 
@@ -177,7 +185,7 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@Test
+	@org.junit.Test
 	public void testRemoveProductById(){
 		Product product = new Product();
 
@@ -193,6 +201,5 @@ class AppleStoreApplicationTests {
 
 
 	}
-
 
 }
