@@ -1,5 +1,7 @@
 package com.sailesh.springproject.applestore.controller;
 
+import com.sailesh.springproject.applestore.entity.Product;
+import com.sailesh.springproject.applestore.global.GlobalData;
 import com.sailesh.springproject.applestore.service.ProductService;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -48,16 +51,16 @@ public class TestCartController {
                 .andExpect(MockMvcResultMatchers.view().name("cart-view"));
     }
 
-//    @Test
-//    public  void testAddToCart() throws Exception {
-//        Product product = new Product();
-//        product.setId(1);
-//
-//        GlobalData.cart.add(product);
-//        setup();
-//        mockMvc
-//                .perform(MockMvcRequestBuilders.get("/addToCart/1"))
-//                .andExpect(status().isOk())
-//                .andExpect(status().is3xxRedirection());
-//    }
+    @Test
+    public  void testAddToCart() throws Exception {
+        Product product = new Product();
+        product.setId(1);
+
+        GlobalData.cart.add(product);
+        setup();
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/addToCart/"+GlobalData.cart.get(0).getId()))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+    }
 }
