@@ -51,7 +51,7 @@ class AppleStoreApplicationTests {
 		verify(categoryRepository,times(1)).save(category1);
 	}
 
-	@org.junit.Test
+	@Test
 	public void testGetAllCategory(){
 
 		Category category1 = new Category();
@@ -73,7 +73,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@org.junit.Test
+	@Test
 	public void testDeleteCategoryById(){
 		Category category1 = new Category();
 		category1.setId(1);
@@ -84,7 +84,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@org.junit.Test
+	@Test
 	public void testGetCategoryById() {
 		Category category1 = new Category();
 		category1.setId(1);
@@ -101,7 +101,7 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@org.junit.Test
+	@Test
 	public void testAddProduct(){
 		Product product = new Product();
 
@@ -120,7 +120,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@org.junit.Test
+	@Test
 	public void testGetProductById(){
 		Product product = new Product();
 
@@ -138,7 +138,7 @@ class AppleStoreApplicationTests {
 
 	}
 
-	@org.junit.Test
+	@Test
 	public void testGetAllProducts() {
 		Product product1 = new Product();
 
@@ -168,7 +168,7 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@org.junit.Test
+	@Test
 	public void testGetAllProductsByCategoryId(){
 		Product product = new Product();
 
@@ -188,7 +188,7 @@ class AppleStoreApplicationTests {
 	}
 
 
-	@org.junit.Test
+	@Test
 	public void testRemoveProductById(){
 		Product product = new Product();
 
