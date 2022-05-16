@@ -9,5 +9,4 @@ public class AppleStoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppleStoreApplication.class, args);
 	}
-
 }

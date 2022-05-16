@@ -75,7 +75,7 @@ public class TestLoginController {
         mockMvc.perform(post("/register")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .param("firstName", "Sri")
-                .param("lastName", "Laxm")
+                .param("lastName", "Laxmi")
                 .param("email", "sriles@gmail.com")
                 .param("password", "1234567a")
         )
